@@ -68,7 +68,7 @@ button {
   margin-inline: auto;
 }
 
-/* NAV / HERO */
+/* HERO + NAV */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -90,19 +90,19 @@ button {
 }
 
 .hero-parallax--back {
-  background-image: url("images/castle-layer-back.webp");
-  filter: saturate(0.8) brightness(0.6);
+  background-image: url("фото замка.jpg");
+  filter: saturate(0.85) brightness(0.65);
 }
 
 .hero-parallax--mid {
-  background-image: url("images/castle-layer-mid.webp");
+  background-image: url("фото замка.jpg");
   mix-blend-mode: screen;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .hero-parallax--front {
-  background-image: url("images/castle-layer-front.webp");
-  opacity: 0.8;
+  background-image: url("фото замка.jpg");
+  opacity: 0.25;
 }
 
 .hero::before {
@@ -196,7 +196,7 @@ button {
   background: var(--text-main);
 }
 
-/* HERO GRID */
+/* HERO CONTENT */
 .hero-inner {
   padding-top: 12px;
 }
@@ -509,7 +509,6 @@ button {
   opacity: 1;
 }
 
-/* Лайтбокс */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -870,3 +869,12 @@ button {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Canvas-слой для частиц */
+.particle-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 120;
+}
+
