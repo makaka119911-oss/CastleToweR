@@ -48,7 +48,9 @@
               в замке при свечах — только по персональному QR‑приглашению.
             </p>
             <div class="hero-cta-row">
-              <a href="#register" class="btn btn-primary">Получить QR‑приглашение</a>
+              <a href="#register" class="btn btn-primary" data-particle-button>
+                Получить QR‑приглашение
+              </a>
               <button type="button" class="btn btn-ghost js-scroll-to-gallery">
                 Посмотреть атмосферу
               </button>
@@ -94,7 +96,7 @@
         <div class="about-grid">
           <article class="about-card">
             <div class="about-photo-wrap">
-              <img src="images/tatiana.webp" alt="Татьяна Солнечная" loading="lazy">
+              <img src="фото Татьяны Солнечной.jpg" alt="Татьяна Солнечная" loading="lazy">
             </div>
             <h3>Татьяна Солнечная</h3>
             <p class="about-role">Психолог‑сексолог</p>
@@ -106,7 +108,7 @@
 
           <article class="about-card">
             <div class="about-photo-wrap">
-              <img src="images/victoria.webp" alt="Виктория Румянцева" loading="lazy">
+              <img src="Фото Виктории РУмянцевой.jpg" alt="Виктория Румянцева" loading="lazy">
             </div>
             <h3>Виктория Румянцева</h3>
             <p class="about-role">Психолог‑сексолог</p>
@@ -167,17 +169,17 @@
         </header>
 
         <div class="gallery-grid">
-          <button class="gallery-item" data-full="images/gal1-large.webp">
-            <img src="images/gal1-thumb.webp" alt="Зал замка при свечах" loading="lazy">
+          <button class="gallery-item" data-full="галерея.jpg">
+            <img src="галерея.jpg" alt="Зал замка при свечах" loading="lazy">
           </button>
-          <button class="gallery-item" data-full="images/gal2-large.webp">
-            <img src="images/gal2-thumb.webp" alt="Сервировка стола и бокалов" loading="lazy">
+          <button class="gallery-item" data-full="галерея1.jpg">
+            <img src="галерея1.jpg" alt="Женский круг в замке" loading="lazy">
           </button>
-          <button class="gallery-item" data-full="images/gal3-large.webp">
-            <img src="images/gal3-thumb.webp" alt="Женский круг в замке" loading="lazy">
+          <button class="gallery-item" data-full="галерея2.jpg">
+            <img src="галерея2.jpg" alt="Сервировка и свечи" loading="lazy">
           </button>
-          <button class="gallery-item" data-full="images/gal4-large.webp">
-            <img src="images/gal4-thumb.webp" alt="Детали декора и кружева" loading="lazy">
+          <button class="gallery-item" data-full="галерея3.jpg">
+            <img src="галерея3.jpg" alt="Интерьеры и свет" loading="lazy">
           </button>
         </div>
       </div>
@@ -210,7 +212,7 @@
           <li class="how-item">
             <span class="how-num">3</span>
             <h3>Подтверждение организаторов</h3>
-            <p>Заявка приходит организаторам в Telegram, вы получаете согласование деталей.</p>
+            <p>Заявка приходит организаторам в Telegram, вы согласуете детали вечера.</p>
           </li>
           <li class="how-item">
             <span class="how-num">4</span>
@@ -319,8 +321,8 @@
               <p class="register-card-title">Ваш QR‑код приглашения</p>
               <div id="qrContainer" class="register-qr"></div>
               <p class="register-card-text">
-                QR‑код генерируется без ваших личных данных: он содержит только
-                технический идентификатор регистрации.  
+                QR‑код генерируется без ваших личных данных: в нём только
+                технический идентификатор заявки.  
                 При входе в замок мы сверяем код с заявкой и подтверждаем ваше участие.
               </p>
             </div>
@@ -381,8 +383,9 @@
     </footer>
   </div>
 
-  <!-- Библиотека QRCode.js -->
+  <!-- QRCode.js -->
   <script src="https://davidshimjs.github.io/qrcodejs/qrcode.min.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
+
