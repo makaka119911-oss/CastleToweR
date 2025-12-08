@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Вечера в замке — приватные женские события</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="mobile-optimization.css">
+</head>
+<body>
+  <div class="page-shell">
+    <div class="bg-orbit-layer"></div>
+
+    <!-- HERO -->
+    <header class="hero" id="top">
+      <div class="hero-parallax hero-parallax--back"></div>
+      <div class="hero-parallax hero-parallax--mid"></div>
+      <div class="hero-parallax hero-parallax--front"></div>
+
+      <div class="hero-inner container">
+        <nav class="nav">
+          <div class="nav-left">
+            <div class="nav-logo">
+              <span class="nav-logo-mark">Castle Evenings</span>
+              <span class="nav-logo-sub">Татьяна Солнечная &amp; Виктория Румянцева</span>
+            </div>
+          </div>
+          <div class="nav-right">
+            <a href="#about" class="nav-link">О нас</a>
+            <a href="#formats" class="nav-link">Форматы</a>
+            <a href="#register" class="nav-pill">QR‑приглашение</a>
+          </div>
+          <button class="nav-burger" aria-label="Открыть меню">
+            <span></span><span></span>
+          </button>
+        </nav>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="hero-kicker">Женское пространство в старинном замке</p>
+            <h1 class="hero-title">
+              Вечера, где желания
+              <span class="hero-title-highlight">звучат шёпотом<br>и без стыда</span>
+            </h1>
+            <p class="hero-subtitle">
+              Девичники, дни рождения и камерные мастер‑классы по сексуальности
+              в замке при свечах — только по персональному QR‑приглашению.
+            </p>
+            <div class="hero-cta-row">
+              <a href="#register" class="btn btn-primary">Получить QR‑приглашение</a>
+              <button type="button" class="btn btn-ghost js-scroll-to-gallery">
+                Посмотреть атмосферу
+              </button>
+            </div>
+            <div class="hero-meta-row">
+              <p>Только для женщин · 18+</p>
+              <p>Формат: живые встречи в замке под Москвой</p>
+            </div>
+          </div>
+
+          <aside class="hero-ticket">
+            <p class="hero-ticket-label">Пример приглашения</p>
+            <div class="hero-ticket-card">
+              <div class="hero-ticket-top">
+                <div class="hero-ticket-text">
+                  <p class="hero-ticket-title">Вечер в замке</p>
+                  <p class="hero-ticket-sub">
+                    Ваш приватный вечер: девичник, день рождения или женский круг.
+                  </p>
+                </div>
+                <div id="heroQr" class="hero-qr"></div>
+              </div>
+              <div class="hero-ticket-bottom">
+                <p class="hero-ticket-meta">
+                  Вход только по уникальному QR‑коду. После регистрации вы получите
+                  код на экране и по запросу — в Telegram.
+                </p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </header>
+
+    <!-- О НАС -->
+    <section class="section section-about" id="about">
+      <div class="container">
+        <header class="section-head">
+          <p class="section-kicker">Психологи‑сексологи</p>
+          <h2>Те, кто держат пространство вечеров</h2>
+        </header>
+
+        <div class="about-grid">
+          <article class="about-card">
+            <div class="about-photo-wrap">
+              <img src="images/tatiana.webp" alt="Татьяна Солнечная" loading="lazy">
+            </div>
+            <h3>Татьяна Солнечная</h3>
+            <p class="about-role">Психолог‑сексолог</p>
+            <p class="about-text">
+              Помогает возвращать чувствительность и удовольствие, убирать стыд и страх
+              говорить о сексе, выстраивать честный диалог с собой и партнёром.
+            </p>
+          </article>
+
+          <article class="about-card">
+            <div class="about-photo-wrap">
+              <img src="images/victoria.webp" alt="Виктория Румянцева" loading="lazy">
+            </div>
+            <h3>Виктория Румянцева</h3>
+            <p class="about-role">Психолог‑сексолог</p>
+            <p class="about-text">
+              Создаёт тёплое женское поле, где можно говорить о теле и желаниях без табу,
+              проживать трансформацию мягко, но глубоко.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ФОРМАТЫ -->
+    <section class="section section-formats" id="formats">
+      <div class="container">
+        <header class="section-head section-head--center">
+          <p class="section-kicker">Формат под ваш запрос</p>
+          <h2>Какой вечер вы хотите прожить?</h2>
+        </header>
+
+        <div class="formats-grid">
+          <article class="format-card">
+            <h3>Девичник в замке</h3>
+            <p class="format-meta">3–4 часа · 6–12 участниц</p>
+            <p class="format-text">
+              Игровые практики, разговоры о желаниях и теле, ритуалы на отпускание стыда
+              и возвращение удовольствия — в интимном кругу подруг.
+            </p>
+          </article>
+
+          <article class="format-card">
+            <h3>День рождения в замке</h3>
+            <p class="format-meta">4–5 часов · индивидуальный сценарий</p>
+            <p class="format-text">
+              Личный праздник в атмосфере свечей и бокалов, где пожелания в вашу сторону
+              звучат так же внимательно, как вы привыкли заботиться о других.
+            </p>
+          </article>
+
+          <article class="format-card">
+            <h3>Мастер‑классы и женские круги</h3>
+            <p class="format-meta">2–3 часа · тематические вечера</p>
+            <p class="format-text">
+              Темы: сексуальность, телесность, голос «хочу» и «нет»,
+              разговоры о сексе без табу, мягкая работа со стыдом.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ГАЛЕРЕЯ -->
+    <section class="section section-gallery" id="gallery">
+      <div class="container">
+        <header class="section-head section-head--center">
+          <p class="section-kicker">Атмосфера</p>
+          <h2>Как выглядит вечер в замке</h2>
+        </header>
+
+        <div class="gallery-grid">
+          <button class="gallery-item" data-full="images/gal1-large.webp">
+            <img src="images/gal1-thumb.webp" alt="Зал замка при свечах" loading="lazy">
+          </button>
+          <button class="gallery-item" data-full="images/gal2-large.webp">
+            <img src="images/gal2-thumb.webp" alt="Сервировка стола и бокалов" loading="lazy">
+          </button>
+          <button class="gallery-item" data-full="images/gal3-large.webp">
+            <img src="images/gal3-thumb.webp" alt="Женский круг в замке" loading="lazy">
+          </button>
+          <button class="gallery-item" data-full="images/gal4-large.webp">
+            <img src="images/gal4-thumb.webp" alt="Детали декора и кружева" loading="lazy">
+          </button>
+        </div>
+      </div>
+
+      <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Закрыть">&times;</button>
+        <img class="lightbox-img" src="" alt="Просмотр фото">
+      </div>
+    </section>
+
+    <!-- КАК ЭТО ПРОХОДИТ -->
+    <section class="section section-how" id="how">
+      <div class="container">
+        <header class="section-head section-head--center">
+          <p class="section-kicker">Маршрут вечера</p>
+          <h2>От регистрации до входа в замок</h2>
+        </header>
+
+        <ol class="how-list">
+          <li class="how-item">
+            <span class="how-num">1</span>
+            <h3>Регистрация</h3>
+            <p>Заполняете форму: имя, фамилия, телефон, e‑mail и пожелания к вечеру.</p>
+          </li>
+          <li class="how-item">
+            <span class="how-num">2</span>
+            <h3>Получение QR‑кода</h3>
+            <p>Сайт создаёт уникальный QR‑код приглашения и показывает его на экране.</p>
+          </li>
+          <li class="how-item">
+            <span class="how-num">3</span>
+            <h3>Подтверждение организаторов</h3>
+            <p>Заявка приходит организаторам в Telegram, вы получаете согласование деталей.</p>
+          </li>
+          <li class="how-item">
+            <span class="how-num">4</span>
+            <h3>Вход в замок</h3>
+            <p>В день события вы предъявляете QR‑код на входе — и начинаете свой вечер.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ОТЗЫВЫ -->
+    <section class="section section-reviews" id="reviews">
+      <div class="container">
+        <header class="section-head section-head--center">
+          <p class="section-kicker">Голоса участниц</p>
+          <h2>Что говорят о вечерах</h2>
+        </header>
+
+        <div class="reviews-grid">
+          <article class="review-card">
+            <p class="review-text">
+              «До замка я думала, что говорить о сексе — это про стыд.
+              После круга поняла, что это про близость и заботу о себе.»
+            </p>
+            <p class="review-author">— Анна, 32</p>
+          </article>
+          <article class="review-card">
+            <p class="review-text">
+              «Девичник в замке стал точкой, где я прямым текстом сказала себе:
+              я имею право хотеть удовольствия и праздника.»
+            </p>
+            <p class="review-author">— Мария, 28</p>
+          </article>
+          <article class="review-card">
+            <p class="review-text">
+              «Было ощущение, будто мы попали в кино: свечи, замок, кружево —
+              и при этом очень живая, тёплая реальность.»
+            </p>
+            <p class="review-author">— Екатерина, 36</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- РЕГИСТРАЦИЯ -->
+    <section class="section section-register" id="register">
+      <div class="container">
+        <header class="section-head section-head--center">
+          <p class="section-kicker">QR‑приглашение</p>
+          <h2>Заполните форму и получите уникальный код входа</h2>
+        </header>
+
+        <div class="register-grid">
+          <form class="form" id="registrationForm" novalidate enctype="multipart/form-data">
+            <div class="form-row">
+              <label class="field">
+                <span>Имя</span>
+                <input type="text" name="firstName" required placeholder="Ваше имя">
+              </label>
+              <label class="field">
+                <span>Фамилия</span>
+                <input type="text" name="lastName" required placeholder="Ваша фамилия">
+              </label>
+            </div>
+
+            <div class="form-row">
+              <label class="field">
+                <span>Телефон</span>
+                <input type="tel" name="phone" required placeholder="+7…">
+              </label>
+              <label class="field">
+                <span>E‑mail</span>
+                <input type="email" name="email" required placeholder="you@example.com">
+              </label>
+            </div>
+
+            <label class="field">
+              <span>Фото (аватар, по желанию)</span>
+              <input type="file" name="avatar" accept="image/*">
+              <small>Опционально · для персонализации приглашения (не шьётся в QR‑код).</small>
+            </label>
+
+            <label class="field">
+              <span>Пожелания к вечеру (по желанию)</span>
+              <textarea name="comment" rows="3" placeholder="Дата, количество участниц, особые запросы…"></textarea>
+            </label>
+
+            <label class="consent">
+              <input type="checkbox" name="consent" required>
+              <span>
+                Соглашаюсь с
+                <a href="#privacy" class="link">политикой конфиденциальности</a>
+                и обработкой персональных данных и фото.
+              </span>
+            </label>
+
+            <button type="submit" class="btn btn-primary btn-full">
+              Отправить заявку и сгенерировать QR‑код
+            </button>
+
+            <p class="form-status" id="formStatus"></p>
+          </form>
+
+          <aside class="register-side">
+            <div class="register-card">
+              <p class="register-card-title">Ваш QR‑код приглашения</p>
+              <div id="qrContainer" class="register-qr"></div>
+              <p class="register-card-text">
+                QR‑код генерируется без ваших личных данных: он содержит только
+                технический идентификатор регистрации.  
+                При входе в замок мы сверяем код с заявкой и подтверждаем ваше участие.
+              </p>
+            </div>
+
+            <div class="register-note">
+              <h3>E‑mail / Telegram отправка</h3>
+              <p>
+                Возможна интеграция с почтовым сервисом или ботом для автоматической
+                отправки QR‑кода. Сейчас заявка приходит организаторам в Telegram,
+                а код отображается на сайте.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Оверлей подтверждения -->
+    <div class="overlay" id="confirmOverlay" aria-hidden="true">
+      <div class="overlay-dialog">
+        <button class="overlay-close" aria-label="Закрыть">&times;</button>
+        <h2>Заявка принята</h2>
+        <p>
+          Уникальный QR‑код приглашения создан. Сохраните его и предъявите при входе
+          в замок в день мероприятия.
+        </p>
+        <div class="overlay-qr">
+          <div id="overlayQr"></div>
+        </div>
+        <button class="btn btn-ghost" id="overlayOk">Понятно</button>
+      </div>
+    </div>
+
+    <!-- ФУТЕР -->
+    <footer class="footer" id="footer">
+      <div class="container footer-grid">
+        <div>
+          <p class="footer-brand">Вечера в замке</p>
+          <p class="footer-copy">
+            © 2025, Татьяна Солнечная и Виктория Румянцева. Сайт для взрослых (18+).
+          </p>
+        </div>
+        <div>
+          <p class="footer-title">Контакты</p>
+          <ul class="footer-list">
+            <li><a href="mailto:info@castle-evenings.ru">info@castle-evenings.ru</a></li>
+            <li><a href="https://t.me/your_telegram" target="_blank" rel="noreferrer">Telegram</a></li>
+          </ul>
+        </div>
+        <div id="privacy">
+          <p class="footer-title">Политика и данные</p>
+          <ul class="footer-list">
+            <li><a href="#privacy">Политика конфиденциальности</a></li>
+            <li><a href="#privacy">Согласие на обработку персональных данных и фото</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Библиотека QRCode.js -->
+  <script src="https://davidshimjs.github.io/qrcodejs/qrcode.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
