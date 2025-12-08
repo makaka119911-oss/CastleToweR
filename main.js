@@ -1,4 +1,4 @@
-// Параллакс слоёв hero
+// Параллакс фоновых слоёв hero
 const layers = document.querySelectorAll(".hero-parallax");
 window.addEventListener("scroll", () => {
   const offset = window.scrollY || window.pageYOffset;
@@ -20,7 +20,7 @@ document
     document.getElementById("gallery")?.scrollIntoView({ behavior: "smooth" });
   });
 
-// Анимация при скролле
+// Анимация появления блоков при скролле
 const animated = document.querySelectorAll(
   ".section, .format-card, .about-card, .review-card, .how-item"
 );
@@ -37,7 +37,7 @@ animated.forEach((el) => {
   io.observe(el);
 });
 
-// Лайтбокс
+// Лайтбокс для галереи
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.querySelector(".lightbox-img");
 const lightboxClose = document.querySelector(".lightbox-close");
@@ -80,7 +80,7 @@ const TELEGRAM_BOT_TOKEN =
   "8402206062:AAEJim1GkriKqY_o1mOo0YWSWQDdw5Qy2h0";
 const TELEGRAM_CHAT_ID = "-1002313355102";
 const TELEGRAM_API_URL = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-// Для продакшена токен нужно прятать на сервере. [web:50][web:100]
+// В продакшене токен нужно хранить на сервере. [web:50][web:100]
 
 // Генерация ID (без персональных данных)
 function generateRegistrationId() {
@@ -91,13 +91,13 @@ function generateRegistrationId() {
   return `CSTL-${ts}-${rnd}`.toUpperCase();
 }
 
-// QR с техническим ID (без имени/почты)
+// QR с техническим ID
 function createQrInContainer(containerId, registrationId) {
   const el = document.getElementById(containerId);
   if (!el || !window.QRCode) return;
   el.innerHTML = "";
   new QRCode(el, {
-    text: registrationId, // только ID
+    text: registrationId,
     width: 220,
     height: 220,
     colorDark: "#000000",
@@ -171,14 +171,11 @@ form?.addEventListener("submit", async (e) => {
     return;
   }
 
-  // Уникальный ID, который шьётся в QR (без ФИО и e‑mail)
   const registrationId = generateRegistrationId();
 
-  // QR на странице и в оверлее
   createQrInContainer("qrContainer", registrationId);
   createQrInContainer("overlayQr", registrationId);
 
-  // Сообщение для организаторов (здесь уже есть ФИО и контакты)
   const telegramText =
     `<b>Новая заявка в замок</b>\n` +
     `ID: <code>${registrationId}</code>\n\n` +
@@ -208,4 +205,84 @@ form?.addEventListener("submit", async (e) => {
     formStatus.style.color = "var(--danger)";
   }
 });
+
+// Золотые частицы от кнопки hero
+const particleButton = document.querySelector("[data-particle-button]");
+let particleCanvas;
+let particleCtx;
+let particles = [];
+let particleAnimationFrame;
+
+function createParticleCanvas() {
+  if (particleCanvas) return;
+  particleCanvas = document.createElement("canvas");
+  particleCanvas.className = "particle-layer";
+  particleCanvas.width = window.innerWidth;
+  particleCanvas.height = window.innerHeight;
+  particleCtx = particleCanvas.getContext("2d");
+  document.body.appendChild(particleCanvas);
+
+  window.addEventListener("resize", () => {
+    if (!particleCanvas) return;
+    particleCanvas.width = window.innerWidth;
+    particleCanvas.height = window.innerHeight;
+  });
+}
+
+function spawnParticlesAt(x, y, color) {
+  createParticleCanvas();
+  const count = 40;
+
+  for (let i = 0; i < count; i++) {
+    const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
+    const speed = 2 + Math.random() * 3;
+    particles.push({
+      x,
+      y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed - 1,
+      life: 1,
+      radius: 2 + Math.random() * 3,
+      color,
+    });
+  }
+
+  if (!particleAnimationFrame) {
+    animateParticles();
+  }
+}
+
+function animateParticles() {
+  if (!particleCtx || particles.length === 0) {
+    particleAnimationFrame = null;
+    return;
+  }
+
+  particleAnimationFrame = requestAnimationFrame(animateParticles);
+  particleCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+
+  particles = particles.filter((p) => p.life > 0);
+  particles.forEach((p) => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.04;
+    p.life -= 0.02;
+
+    particleCtx.globalAlpha = Math.max(p.life, 0);
+    particleCtx.fillStyle = p.color;
+    particleCtx.beginPath();
+    particleCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    particleCtx.fill();
+  });
+
+  particleCtx.globalAlpha = 1;
+}
+
+particleButton?.addEventListener("click", (e) => {
+  const rect = e.currentTarget.getBoundingClientRect();
+  const x = rect.left + rect.width / 2;
+  const y = rect.top + rect.height / 2;
+  spawnParticlesAt(x, y, "#f3d79a");
+});
+
 
