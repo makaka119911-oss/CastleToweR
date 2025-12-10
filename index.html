@@ -1,332 +1,128 @@
 <!DOCTYPE html>
-<html lang="ru" class="luxury-theme">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Эксклюзивное женское мероприятие | Замковый вечер с Татьяной Солнечной</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=EB+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="mobile-optimization.css" media="screen and (max-width: 768px)">
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вечер в Замке</title>
 </head>
 <body>
-    <!-- Hero-секция -->
-    <section class="hero-section" id="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <div class="luxury-badge">
-                <i class="fas fa-crown"></i>
-                <span>Эксклюзивное приглашение</span>
-            </div>
-            <h1 class="hero-title shimmer-effect">Замковый Вечер Стиля</h1>
-            <p class="hero-subtitle">Приватное женское собрание в исторических интерьерах</p>
-            <div class="hero-details">
-                <div class="detail-item">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>25 ноября 2024</span>
-                </div>
-                <div class="detail-item">
-                    <i class="fas fa-clock"></i>
-                    <span>19:00 - 23:00</span>
-                </div>
-                <div class="detail-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Исторический замок "Белая Башня"</span>
-                </div>
-            </div>
-            <a href="#registration" class="cta-button luxury-btn">
-                <span class="btn-text">Получить приглашение</span>
-                <i class="fas fa-chevron-right btn-icon"></i>
-            </a>
-            <div class="scroll-indicator">
-                <i class="fas fa-chevron-down"></i>
-            </div>
-        </div>
-    </section>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1>Вечер в Замке</h1>
+      <p class="subtitle">Погружение в мир женской мудрости и элегантности</p>
+      <p class="host">с Татьяной Солнечной</p>
+      <button class="cta-button" onclick="showRegistration()">Зарегистрироваться</button>
+    </div>
+  </section>
 
-    <!-- О мероприятии -->
-    <section class="about-section section-spacing" id="about">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Исключительная Вечерняя Симфония</h2>
-                <div class="title-divider">
-                    <div class="divider-line"></div>
-                    <i class="fas fa-star divider-icon"></i>
-                    <div class="divider-line"></div>
-                </div>
-            </div>
-            <p class="section-description">
-                Уникальное событие, где элегантность встречает вдохновение в стенах исторического замка. 
-                Вечер, созданный для тех, кто ценит исключительное общение, утончённую атмосферу и глубину смыслов.
-            </p>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-gem"></i>
-                    </div>
-                    <h3 class="feature-title">Эксклюзивный Формат</h3>
-                    <p class="feature-text">Только для 30 избранных участниц в уникальной замковой атмосфере</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h3 class="feature-title">Глубина Общения</h3>
-                    <p class="feature-text">Значимые диалоги, инсайты и синергия с удивительными женщинами</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h3 class="feature-title">Эстетическое Наслаждение</h3>
-                    <p class="feature-text">Изысканный декор, живая музыка и гастрономические шедевры</p>
-                </div>
-            </div>
+  <!-- Registration Form -->
+  <div id="registrationModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeRegistration()">&times;</span>
+      <h2>Регистрация на Вечер</h2>
+      <form id="registrationForm" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="name">Имя и Фамилия</label>
+          <input type="text" id="name" name="name" required>
         </div>
-    </section>
-
-    <!-- О Татьяне Солнечной -->
-    <section class="host-section section-spacing" id="host">
-        <div class="container">
-            <div class="host-grid">
-                <div class="host-image-container">
-                    <div class="image-frame">
-                        <div class="frame-decoration"></div>
-                        <img src="фото Татьяны Солнечной.jpg" alt="Татьяна Солнечная - ведущая мероприятия" class="host-image">
-                        <div class="image-overlay"></div>
-                    </div>
-                </div>
-                <div class="host-content">
-                    <div class="host-badge">Ведущая вечера</div>
-                    <h2 class="host-title">Татьяна<br>Солнечная</h2>
-                    <p class="host-description">
-                        Эксперт в создании трансформационных пространств для женщин, автор методик 
-                        глубокого нетворкинга и осознанного взаимодействия. Провела более 150 
-                        приватных событий для женщин-лидеров по всему миру.
-                    </p>
-                    <div class="host-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">12+</span>
-                            <span class="stat-label">лет опыта</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">150+</span>
-                            <span class="stat-label">мероприятий</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">2000+</span>
-                            <span class="stat-label">участниц</span>
-                        </div>
-                    </div>
-                    <blockquote class="host-quote">
-                        <i class="fas fa-quote-left quote-icon"></i>
-                        <p>Настоящая роскошь — это пространство, где каждая женщина чувствует свою ценность и силу</p>
-                    </blockquote>
-                </div>
-            </div>
+        <div class="form-group">
+          <label for="phone">Телефон</label>
+          <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
         </div>
-    </section>
-
-    <!-- Программа мероприятия -->
-    <section class="program-section section-spacing" id="program">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Хронология Вечера</h2>
-                <div class="title-divider">
-                    <div class="divider-line"></div>
-                    <i class="fas fa-moon divider-icon"></i>
-                    <div class="divider-line"></div>
-                </div>
-            </div>
-            <div class="program-timeline">
-                <div class="timeline-item">
-                    <div class="timeline-time">19:00</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">
-                            <i class="fas fa-glass-cheers"></i>
-                        </div>
-                        <h3 class="timeline-title">Торжественное прибытие</h3>
-                        <p class="timeline-description">Встреча с шампанским, знакомство в атмосфере замкового сада</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-time">20:00</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">
-                            <i class="fas fa-crown"></i>
-                        </div>
-                        <h3 class="timeline-title">Открытый диалог</h3>
-                        <p class="timeline-description">Сессия "Сила женской идентичности" с Татьяной Солнечной</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-time">21:30</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">
-                            <i class="fas fa-utensils"></i>
-                        </div>
-                        <h3 class="timeline-title">Гастрономическая пауза</h3>
-                        <p class="timeline-description">Авторский ужин от шеф-повара в бальном зале замка</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-time">22:30</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">
-                            <i class="fas fa-music"></i>
-                        </div>
-                        <h3 class="timeline-title">Живая музыка</h3>
-                        <p class="timeline-description">Выступление струнного квартета и свободное общение</p>
-                    </div>
-                </div>
-            </div>
+        <div class="form-group">
+          <label for="telegram">Telegram</label>
+          <input type="text" id="telegram" name="telegram" placeholder="@username" required>
         </div>
-    </section>
-
-    <!-- QR-код блок -->
-    <section class="qr-section section-spacing" id="qr">
-        <div class="container">
-            <div class="qr-container">
-                <div class="qr-content">
-                    <h2 class="qr-title">Цифровое Приглашение</h2>
-                    <p class="qr-description">
-                        Отсканируйте QR-код для получения полной программы, 
-                        деталей дресс-кода и приватного доступа к материалам мероприятия
-                    </p>
-                    <div class="qr-features">
-                        <div class="qr-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Детальная программа</span>
-                        </div>
-                        <div class="qr-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Интерактивная карта замка</span>
-                        </div>
-                        <div class="qr-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Приватный фотобанк</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="qr-code-wrapper">
-                    <div class="qr-code-container">
-                        <div class="qr-code-placeholder">
-                            <i class="fas fa-qrcode qr-icon"></i>
-                            <span class="qr-text">QR-код 300×300</span>
-                            <span class="qr-instruction">(замените на ваш QR-код)</span>
-                        </div>
-                        <div class="qr-code-decoration">
-                            <div class="decoration-circle gold"></div>
-                            <div class="decoration-circle green"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="form-group">
+          <label for="photo">Фото</label>
+          <input type="file" id="photo" name="photo" accept="image/*" required>
+          <div id="photoPreview"></div>
         </div>
-    </section>
+        <button type="submit" class="submit-button">Получить QR-код приглашения</button>
+      </form>
+    </div>
+  </div>
 
-    <!-- Блок "Кто приглашает" -->
-    <section class="invitation-section section-spacing" id="invitation">
-        <div class="container">
-            <div class="invitation-card">
-                <div class="invitation-header">
-                    <h2 class="invitation-title">Детали Приглашения</h2>
-                    <div class="invitation-divider"></div>
-                </div>
-                <div class="invitation-grid">
-                    <div class="invitation-item">
-                        <div class="invitation-icon">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                        <div class="invitation-content">
-                            <h3 class="invitation-subtitle">Организатор</h3>
-                            <p class="invitation-text">Клуб "Lux Femina" при поддержке ассоциации "Women in Style"</p>
-                        </div>
-                    </div>
-                    <div class="invitation-item">
-                        <div class="invitation-icon">
-                            <i class="fas fa-map-marked-alt"></i>
-                        </div>
-                        <div class="invitation-content">
-                            <h3 class="invitation-subtitle">Место проведения</h3>
-                            <p class="invitation-text">Исторический замок "Белая Башня"<br>ул. Замковая, 1, премиальный район</p>
-                        </div>
-                    </div>
-                    <div class="invitation-item">
-                        <div class="invitation-icon">
-                            <i class="fas fa-phone-alt"></i>
-                        </div>
-                        <div class="invitation-content">
-                            <h3 class="invitation-subtitle">Контакты</h3>
-                            <p class="invitation-text">+7 (XXX) XXX-XX-XX<br>invite@luxfemina-club.com</p>
-                        </div>
-                    </div>
-                    <div class="invitation-item">
-                        <div class="invitation-icon">
-                            <i class="fas fa-exclamation-circle"></i>
-                        </div>
-                        <div class="invitation-content">
-                            <h3 class="invitation-subtitle">Важная информация</h3>
-                            <p class="invitation-text">Дресс-код: вечерний коктейль<br>Обязательна предварительная регистрация</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="invitation-cta" id="registration">
-                    <a href="#" class="cta-button luxury-btn secondary">
-                        <span class="btn-text">Забронировать участие</span>
-                        <i class="fas fa-check-circle btn-icon"></i>
-                    </a>
-                </div>
-            </div>
+  <!-- QR Code Result -->
+  <div id="qrModal" class="modal">
+    <div class="modal-content qr-result">
+      <span class="close" onclick="closeQR()">&times;</span>
+      <h2>Ваше Приглашение</h2>
+      <div id="qrCodeContainer"></div>
+      <p class="qr-info">Сохраните этот QR-код для входа на мероприятие</p>
+      <button class="download-button" onclick="downloadQR()">Скачать QR-код</button>
+    </div>
+  </div>
+
+  <!-- Event Details -->
+  <section class="details">
+    <div class="container">
+      <h2>О Мероприятии</h2>
+      <div class="details-grid">
+        <div class="detail-item">
+          <div class="icon-professional"></div>
+          <h3>Локация</h3>
+          <p>Исторический замок с атмосферой роскоши</p>
         </div>
-    </section>
-
-    <!-- Футер -->
-    <footer class="footer-section">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <div class="logo-container">
-                        <i class="fas fa-crown logo-icon"></i>
-                        <span class="logo-text">Lux Femina</span>
-                    </div>
-                    <p class="footer-slogan">Создаём пространства для вдохновения</p>
-                </div>
-                <div class="footer-social">
-                    <h3 class="social-title">Подписывайтесь на нас</h3>
-                    <div class="social-icons">
-                        <a href="#" class="social-link" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Telegram">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-legal">
-                    <p class="copyright">© 2024 Lux Femina Club. Все права защищены.</p>
-                    <div class="footer-links">
-                        <a href="#" class="footer-link">Конфиденциальность</a>
-                        <span class="link-divider">•</span>
-                        <a href="#" class="footer-link">Условия участия</a>
-                        <span class="link-divider">•</span>
-                        <a href="mailto:info@luxfemina-club.com" class="footer-link">Обратная связь</a>
-                    </div>
-                </div>
-            </div>
+        <div class="detail-item">
+          <div class="icon-professional"></div>
+          <h3>Дресс-код</h3>
+          <p>Элегантный вечерний наряд</p>
         </div>
-    </footer>
+        <div class="detail-item">
+          <div class="icon-professional"></div>
+          <h3>Программа</h3>
+          <p>Мастер-классы, нетворкинг, ужин</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script src="main.js"></script>
+  <!-- Gallery -->
+  <section class="gallery">
+    <div class="container">
+      <h2>Галерея</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://i.imgur.com/zQqjkzH.jpeg" alt="Замок">
+          <div class="gallery-overlay">
+            <p>Исторический замок</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1519167758481-83f29da8c936?w=600" alt="Элегантность">
+          <div class="gallery-overlay">
+            <p>Атмосфера элегантности</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600" alt="Интерьер">
+          <div class="gallery-overlay">
+            <p>Роскошные интерьеры</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1478146896981-b80fe463b330?w=600" alt="Вечер">
+          <div class="gallery-overlay">
+            <p>Волшебный вечер</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600" alt="Зал">
+          <div class="gallery-overlay">
+            <p>Бальный зал</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600" alt="Мероприятие">
+          <div class="gallery-overlay">
+            <p>Незабываемые моменты</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
-
