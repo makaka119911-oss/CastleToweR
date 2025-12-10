@@ -1,288 +1,534 @@
-// Параллакс фоновых слоёв hero
-const layers = document.querySelectorAll(".hero-parallax");
-window.addEventListener("scroll", () => {
-  const offset = window.scrollY || window.pageYOffset;
-  layers.forEach((layer) => {
-    const speed =
-      layer.classList.contains("hero-parallax--back")
-        ? 0.15
-        : layer.classList.contains("hero-parallax--mid")
-        ? 0.3
-        : 0.5;
-    layer.style.transform = `translate3d(0, ${offset * speed * -0.4}px, 0)`;
-  });
+// ===== LUXURY EVENT LANDING - MAIN JS =====
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('%c✨ Замковый Вечер Стиля ✨', 'color: #D4AF37; font-size: 18px; font-weight: bold;');
+    console.log('%cЛендинг для эксклюзивного женского мероприятия', 'color: #556B2F; font-size: 14px;');
+    
+    // Инициализация при загрузке
+    initLuxuryLanding();
+    
+    // Оптимизация производительности для мобильных устройств
+    optimizeForMobile();
+    
+    // Инициализация анимаций при скролле
+    initScrollAnimations();
+    
+    // Инициализация интерактивных элементов
+    initInteractiveElements();
 });
 
-// Скролл к галерее
-document
-  .querySelector(".js-scroll-to-gallery")
-  ?.addEventListener("click", () => {
-    document.getElementById("gallery")?.scrollIntoView({ behavior: "smooth" });
-  });
+// ===== ОСНОВНАЯ ИНИЦИАЛИЗАЦИЯ =====
+function initLuxuryLanding() {
+    // Установка года в футере
+    setCurrentYear();
+    
+    // Оптимизация изображений
+    lazyLoadImages();
+    
+    // Плавная прокрутка для навигации
+    initSmoothScrolling();
+    
+    // Параллакс эффект для hero секции
+    initParallaxEffect();
+    
+    // Инициализация анимации элементов при скролле
+    initScrollReveal();
+}
 
-// Анимация появления блоков при скролле
-const animated = document.querySelectorAll(
-  ".section, .format-card, .about-card, .review-card, .how-item"
-);
-const io = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add("visible");
+// ===== ОПТИМИЗАЦИЯ ДЛЯ МОБИЛЬНЫХ =====
+function optimizeForMobile() {
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+        // Уменьшаем сложные анимации на мобильных
+        reduceAnimations();
+        
+        // Оптимизируем touch события
+        optimizeTouchEvents();
+        
+        // Предотвращаем стандартное поведение жестов
+        preventZoomOnDoubleTap();
+    }
+    
+    // Адаптивная загрузка изображений
+    loadAdaptiveImages();
+    
+    // Оптимизация производительности скролла
+    optimizeScrollPerformance();
+}
+
+// ===== АНИМАЦИИ ПРИ СКРОЛЛЕ =====
+function initScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.feature-card, .timeline-content, .invitation-item');
+    
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+    
+    animatedElements.forEach(element => {
+        observer.observe(element);
     });
-  },
-  { threshold: 0.16 }
-);
-animated.forEach((el) => {
-  el.setAttribute("data-anim", "fade-up");
-  io.observe(el);
-});
-
-// Лайтбокс для галереи
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.querySelector(".lightbox-img");
-const lightboxClose = document.querySelector(".lightbox-close");
-
-document.querySelectorAll(".gallery-item").forEach((item) => {
-  item.addEventListener("click", () => {
-    const src = item.getAttribute("data-full");
-    if (!src || !lightbox || !lightboxImg) return;
-    lightboxImg.src = src;
-    lightbox.classList.add("open");
-  });
-});
-
-lightboxClose?.addEventListener("click", () => {
-  lightbox.classList.remove("open");
-});
-
-lightbox?.addEventListener("click", (e) => {
-  if (e.target === lightbox) lightbox.classList.remove("open");
-});
-
-// Демонстрационный QR на hero
-function makeHeroDemoQr() {
-  const heroQrEl = document.getElementById("heroQr");
-  if (!heroQrEl || !window.QRCode) return;
-
-  new QRCode(heroQrEl, {
-    text: "CASTLE-EVENINGS-DEMO",
-    width: 110,
-    height: 110,
-    colorDark: "#000000",
-    colorLight: "#ffffff",
-    correctLevel: QRCode.CorrectLevel.H,
-  });
-}
-makeHeroDemoQr();
-
-// Telegram конфиг
-const TELEGRAM_BOT_TOKEN =
-  "8402206062:AAEJim1GkriKqY_o1mOo0YWSWQDdw5Qy2h0";
-const TELEGRAM_CHAT_ID = "-1002313355102";
-const TELEGRAM_API_URL = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-// В продакшене токен нужно хранить на сервере. [web:50][web:100]
-
-// Генерация ID (без персональных данных)
-function generateRegistrationId() {
-  const ts = Date.now().toString(36);
-  const rnd = Math.floor(Math.random() * 1e6)
-    .toString(36)
-    .padStart(4, "0");
-  return `CSTL-${ts}-${rnd}`.toUpperCase();
 }
 
-// QR с техническим ID
-function createQrInContainer(containerId, registrationId) {
-  const el = document.getElementById(containerId);
-  if (!el || !window.QRCode) return;
-  el.innerHTML = "";
-  new QRCode(el, {
-    text: registrationId,
-    width: 220,
-    height: 220,
-    colorDark: "#000000",
-    colorLight: "#ffffff",
-    correctLevel: QRCode.CorrectLevel.M,
-  });
-}
-
-// Отправка в Telegram
-async function sendToTelegram(text) {
-  const payload = {
-    chat_id: TELEGRAM_CHAT_ID,
-    text,
-    parse_mode: "HTML",
-  };
-
-  const res = await fetch(TELEGRAM_API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-
-  if (!res.ok) throw new Error("Telegram API error");
-  return res.json();
-}
-
-// Форма регистрации
-const form = document.getElementById("registrationForm");
-const formStatus = document.getElementById("formStatus");
-const overlay = document.getElementById("confirmOverlay");
-const overlayOk = document.getElementById("overlayOk");
-const overlayClose = document.querySelector(".overlay-close");
-
-function openOverlay() {
-  if (!overlay) return;
-  overlay.classList.add("open");
-  overlay.setAttribute("aria-hidden", "false");
-}
-
-function closeOverlay() {
-  if (!overlay) return;
-  overlay.classList.remove("open");
-  overlay.setAttribute("aria-hidden", "true");
-}
-
-overlayOk?.addEventListener("click", closeOverlay);
-overlayClose?.addEventListener("click", closeOverlay);
-overlay?.addEventListener("click", (e) => {
-  if (e.target === overlay) closeOverlay();
-});
-
-form?.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  if (!form || !formStatus) return;
-
-  formStatus.textContent = "";
-  formStatus.style.color = "";
-
-  const fd = new FormData(form);
-  const firstName = (fd.get("firstName") || "").toString().trim();
-  const lastName = (fd.get("lastName") || "").toString().trim();
-  const phone = (fd.get("phone") || "").toString().trim();
-  const email = (fd.get("email") || "").toString().trim();
-  const comment = (fd.get("comment") || "").toString();
-  const consent = fd.get("consent");
-
-  if (!firstName || !lastName || !phone || !email || !consent) {
-    formStatus.textContent =
-      "Пожалуйста, заполните обязательные поля и поставьте галочку согласия.";
-    formStatus.style.color = "var(--danger)";
-    return;
-  }
-
-  const registrationId = generateRegistrationId();
-
-  createQrInContainer("qrContainer", registrationId);
-  createQrInContainer("overlayQr", registrationId);
-
-  const telegramText =
-    `<b>Новая заявка в замок</b>\n` +
-    `ID: <code>${registrationId}</code>\n\n` +
-    `<b>Имя:</b> ${firstName}\n` +
-    `<b>Фамилия:</b> ${lastName}\n` +
-    `<b>Телефон:</b> ${phone}\n` +
-    `<b>E‑mail:</b> ${email}\n` +
-    (comment ? `<b>Пожелания:</b> ${comment}\n` : "") +
-    `\n<i>QR‑код содержит только ID заявки. Сопоставление с данными — у организаторов.</i>`;
-
-  try {
-    formStatus.textContent = "Отправляем вашу заявку…";
-    formStatus.style.color = "var(--text-muted)";
-
-    await sendToTelegram(telegramText);
-
-    formStatus.textContent =
-      "Заявка отправлена. Ваш уникальный QR‑код создан ниже и во всплывающем окне. Сохраните его.";
-    formStatus.style.color = "var(--accent)";
-
-    openOverlay();
-    form.reset();
-  } catch (err) {
-    console.error(err);
-    formStatus.textContent =
-      "Не удалось отправить заявку. Попробуйте позже или напишите нам напрямую в Telegram.";
-    formStatus.style.color = "var(--danger)";
-  }
-});
-
-// Золотые частицы от кнопки hero
-const particleButton = document.querySelector("[data-particle-button]");
-let particleCanvas;
-let particleCtx;
-let particles = [];
-let particleAnimationFrame;
-
-function createParticleCanvas() {
-  if (particleCanvas) return;
-  particleCanvas = document.createElement("canvas");
-  particleCanvas.className = "particle-layer";
-  particleCanvas.width = window.innerWidth;
-  particleCanvas.height = window.innerHeight;
-  particleCtx = particleCanvas.getContext("2d");
-  document.body.appendChild(particleCanvas);
-
-  window.addEventListener("resize", () => {
-    if (!particleCanvas) return;
-    particleCanvas.width = window.innerWidth;
-    particleCanvas.height = window.innerHeight;
-  });
-}
-
-function spawnParticlesAt(x, y, color) {
-  createParticleCanvas();
-  const count = 40;
-
-  for (let i = 0; i < count; i++) {
-    const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
-    const speed = 2 + Math.random() * 3;
-    particles.push({
-      x,
-      y,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed - 1,
-      life: 1,
-      radius: 2 + Math.random() * 3,
-      color,
+// ===== ИНТЕРАКТИВНЫЕ ЭЛЕМЕНТЫ =====
+function initInteractiveElements() {
+    // Эффекты при наведении на кнопки
+    const buttons = document.querySelectorAll('.luxury-btn');
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+        
+        // Клик по кнопке
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            handleButtonClick(this);
+        });
     });
-  }
-
-  if (!particleAnimationFrame) {
-    animateParticles();
-  }
+    
+    // Эффекты для карточек
+    const cards = document.querySelectorAll('.feature-card, .invitation-item');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transition = 'all 0.3s ease';
+        });
+    });
+    
+    // Интерактивность для QR кода
+    const qrPlaceholder = document.querySelector('.qr-code-placeholder');
+    if (qrPlaceholder) {
+        qrPlaceholder.addEventListener('click', function() {
+            showQRInstructions();
+        });
+    }
+    
+    // Социальные иконки
+    const socialLinks = document.querySelectorAll('.social-link');
+    socialLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            // В реальном проекте здесь была бы навигация на соцсети
+            console.log('Навигация на социальную сеть');
+        });
+    });
 }
 
-function animateParticles() {
-  if (!particleCtx || particles.length === 0) {
-    particleAnimationFrame = null;
-    return;
-  }
-
-  particleAnimationFrame = requestAnimationFrame(animateParticles);
-  particleCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
-
-  particles = particles.filter((p) => p.life > 0);
-  particles.forEach((p) => {
-    p.x += p.vx;
-    p.y += p.vy;
-    p.vy += 0.04;
-    p.life -= 0.02;
-
-    particleCtx.globalAlpha = Math.max(p.life, 0);
-    particleCtx.fillStyle = p.color;
-    particleCtx.beginPath();
-    particleCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-    particleCtx.fill();
-  });
-
-  particleCtx.globalAlpha = 1;
+// ===== ПЛАВНАЯ ПРОКРУТКА =====
+function initSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const headerHeight = 80;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 }
 
-particleButton?.addEventListener("click", (e) => {
-  const rect = e.currentTarget.getBoundingClientRect();
-  const x = rect.left + rect.width / 2;
-  const y = rect.top + rect.height / 2;
-  spawnParticlesAt(x, y, "#f3d79a");
+// ===== ПАРАЛЛАКС ЭФФЕКТ =====
+function initParallaxEffect() {
+    const heroSection = document.querySelector('.hero-section');
+    if (!heroSection) return;
+    
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * 0.5;
+        
+        heroSection.style.transform = `translateY(${rate}px)`;
+    });
+}
+
+// ===== ЛЕНИВАЯ ЗАГРУЗКА ИЗОБРАЖЕНИЙ =====
+function lazyLoadImages() {
+    const images = document.querySelectorAll('img[data-src]');
+    
+    const imageObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.add('loaded');
+                observer.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+}
+
+// ===== АДАПТИВНАЯ ЗАГРУЗКА ИЗОБРАЖЕНИЙ =====
+function loadAdaptiveImages() {
+    const isRetina = window.devicePixelRatio > 1;
+    const isMobile = window.innerWidth <= 768;
+    
+    // В реальном проекте здесь была бы логика загрузки
+    // изображений соответствующего размера
+    console.log(`Загрузка изображений для: ${isMobile ? 'мобильного' : 'десктоп'} ${isRetina ? 'Retina' : 'стандартного'} экрана`);
+}
+
+// ===== УСТАНОВКА ТЕКУЩЕГО ГОДА =====
+function setCurrentYear() {
+    const yearElement = document.querySelector('.copyright');
+    if (yearElement) {
+        const currentYear = new Date().getFullYear();
+        yearElement.textContent = yearElement.textContent.replace('2024', currentYear);
+    }
+}
+
+// ===== ОБРАБОТЧИК КЛИКА ПО КНОПКЕ =====
+function handleButtonClick(button) {
+    const buttonText = button.querySelector('.btn-text').textContent;
+    
+    // Эффект пульсации
+    button.classList.add('pulse-effect');
+    setTimeout(() => {
+        button.classList.remove('pulse-effect');
+    }, 600);
+    
+    // Логика в зависимости от типа кнопки
+    if (buttonText.includes('Получить приглашение') || buttonText.includes('Забронировать')) {
+        // Показываем модальное окно регистрации
+        showRegistrationModal();
+        
+        // Аналитика (в реальном проекте)
+        console.log(`Клик по кнопке: ${buttonText}`);
+    }
+}
+
+// ===== МОДАЛЬНОЕ ОКНО РЕГИСТРАЦИИ =====
+function showRegistrationModal() {
+    // Создаем модальное окно
+    const modalHTML = `
+        <div class="luxury-modal" id="registrationModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <button class="modal-close">&times;</button>
+                <h3 class="modal-title">Заявка на участие</h3>
+                <p class="modal-description">Оставьте свои контакты, и мы вышлем вам персональное приглашение</p>
+                <form class="modal-form" id="registrationForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Электронная почта" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Телефон" required>
+                    </div>
+                    <button type="submit" class="luxury-btn modal-submit">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    `;
+    
+    // Добавляем модальное окно в body
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Стили для модального окна
+    const modalStyles = `
+        <style>
+            .luxury-modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 9999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .modal-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(10, 10, 10, 0.9);
+                backdrop-filter: blur(10px);
+            }
+            
+            .modal-content {
+                position: relative;
+                background: linear-gradient(135deg, #1A1A1A 0%, #0A0A0A 100%);
+                border: 1px solid rgba(212, 175, 55, 0.3);
+                border-radius: 20px;
+                padding: 2.5rem;
+                max-width: 500px;
+                width: 90%;
+                z-index: 2;
+                animation: modalAppear 0.4s ease;
+            }
+            
+            @keyframes modalAppear {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .modal-close {
+                position: absolute;
+                top: 1.5rem;
+                right: 1.5rem;
+                background: none;
+                border: none;
+                color: #D4AF37;
+                font-size: 2rem;
+                cursor: pointer;
+                line-height: 1;
+            }
+            
+            .modal-title {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+                color: #FFFFFF;
+            }
+            
+            .modal-description {
+                margin-bottom: 2rem;
+                opacity: 0.8;
+            }
+            
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+            
+            .form-group input {
+                width: 100%;
+                padding: 1rem;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                color: #FFFFFF;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+            }
+            
+            .form-group input:focus {
+                outline: none;
+                border-color: #D4AF37;
+                background: rgba(255, 255, 255, 0.08);
+            }
+            
+            .modal-submit {
+                width: 100%;
+                justify-content: center;
+                margin-top: 1rem;
+            }
+            
+            @media (max-width: 768px) {
+                .modal-content {
+                    padding: 2rem 1.5rem;
+                    width: 95%;
+                }
+            }
+        </style>
+    `;
+    
+    document.head.insertAdjacentHTML('beforeend', modalStyles);
+    
+    // Обработчики для модального окна
+    const modal = document.getElementById('registrationModal');
+    const closeBtn = modal.querySelector('.modal-close');
+    const form = document.getElementById('registrationForm');
+    
+    // Закрытие по кнопке
+    closeBtn.addEventListener('click', closeModal);
+    
+    // Закрытие по клику на оверлей
+    modal.querySelector('.modal-overlay').addEventListener('click', closeModal);
+    
+    // Отправка формы
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        submitRegistrationForm(this);
+    });
+    
+    // Закрытие по ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+    });
+    
+    function closeModal() {
+        modal.style.opacity = '0';
+        setTimeout(() => {
+            modal.remove();
+            // Удаляем стили
+            const styleElement = document.querySelector('style[data-modal-styles]');
+            if (styleElement) styleElement.remove();
+        }, 300);
+    }
+}
+
+// ===== ОТПРАВКА ФОРМЫ РЕГИСТРАЦИИ =====
+function submitRegistrationForm(form) {
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+    
+    // В реальном проекте здесь был бы AJAX запрос
+    console.log('Данные формы:', data);
+    
+    // Показываем сообщение об успехе
+    const modalContent = document.querySelector('.modal-content');
+    modalContent.innerHTML = `
+        <div class="success-message">
+            <i class="fas fa-check-circle" style="font-size: 4rem; color: #D4AF37; margin-bottom: 1.5rem;"></i>
+            <h3 class="modal-title">Заявка отправлена!</h3>
+            <p class="modal-description">Мы свяжемся с вами в течение 24 часов для подтверждения участия.</p>
+            <button class="luxury-btn modal-close-btn">Закрыть</button>
+        </div>
+    `;
+    
+    // Добавляем обработчик для кнопки закрытия
+    document.querySelector('.modal-close-btn').addEventListener('click', function() {
+        document.getElementById('registrationModal').remove();
+    });
+}
+
+// ===== ИНСТРУКЦИИ ПО QR КОДУ =====
+function showQRInstructions() {
+    alert('Замените этот блок на реальный QR-код 300×300 пикселей\n\nРекомендации:\n1. Сгенерируйте QR-код с ссылкой на детали мероприятия\n2. Сохраните как PNG с прозрачным фоном\n3. Замените блок с классом .qr-code-placeholder на <img src="ваш-qr-код.png" alt="QR код">');
+}
+
+// ===== ОПТИМИЗАЦИЯ ПРОИЗВОДИТЕЛЬНОСТИ СКРОЛЛА =====
+function optimizeScrollPerformance() {
+    let ticking = false;
+    
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                // Операции, чувствительные к производительности
+                updateScrollEffects();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+}
+
+// ===== ОБНОВЛЕНИЕ ЭФФЕКТОВ ПРИ СКРОЛЛЕ =====
+function updateScrollEffects() {
+    const scrolled = window.pageYOffset;
+    const heroTitle = document.querySelector('.hero-title');
+    
+    if (heroTitle && scrolled < 500) {
+        const opacity = 1 - (scrolled / 500);
+        heroTitle.style.opacity = opacity;
+    }
+}
+
+// ===== УМЕНЬШЕНИЕ АНИМАЦИЙ НА МОБИЛЬНЫХ =====
+function reduceAnimations() {
+    // Отключаем сложные анимации
+    document.documentElement.style.setProperty('--transition-smooth', 'all 0.2s ease');
+    
+    // Уменьшаем тени для производительности
+    document.documentElement.style.setProperty('--shadow-medium', '0 4px 15px rgba(0, 0, 0, 0.1)');
+}
+
+// ===== ОПТИМИЗАЦИЯ TOCH СОБЫТИЙ =====
+function optimizeTouchEvents() {
+    // Предотвращаем залипание hover на тач-устройствах
+    document.addEventListener('touchstart', function() {}, {passive: true});
+    
+    // Улучшаем отзывчивость тапов
+    const tapElements = document.querySelectorAll('a, button, .feature-card');
+    tapElements.forEach(el => {
+        el.style.cursor = 'pointer';
+    });
+}
+
+// ===== ПРЕДОТВРАЩЕНИЕ ZOOM ПРИ ДВОЙНОМ ТАПЕ =====
+function preventZoomOnDoubleTap() {
+    let lastTouchEnd = 0;
+    
+    document.addEventListener('touchend', function(event) {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false);
+}
+
+// ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ЭЛЕМЕНТОВ =====
+function initScrollReveal() {
+    const revealElements = document.querySelectorAll('.feature-card, .timeline-item, .invitation-item, .host-content');
+    
+    const revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('revealed');
+                }, entry.target.dataset.delay || 0);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    revealElements.forEach((el, index) => {
+        el.dataset.delay = index * 100;
+        revealObserver.observe(el);
+    });
+}
+
+// ===== ОБРАБОТЧИКИ ОШИБОК =====
+window.addEventListener('error', function(e) {
+    console.error('Произошла ошибка:', e.error);
+    // В реальном проекте здесь можно отправить ошибку на сервер
 });
+
+// ===== ОПТИМИЗАЦИЯ ПАМЯТИ =====
+window.addEventListener('beforeunload', function() {
+    // Очистка ресурсов перед уходом со страницы
+    const modals = document.querySelectorAll('.luxury-modal');
+    modals.forEach(modal => modal.remove());
+});
+
+// ===== ПОЛЬЗОВАТЕЛЬСКИЕ СОБЫТИЯ ДЛЯ АНАЛИТИКИ =====
+function trackUserInteraction(eventName, details) {
+    // В реальном проекте здесь была бы интеграция с аналитикой
+    console.log(`User interaction: ${eventName}`, details);
+}
+
+// Экспорт функций для глобального доступа (если нужно)
+window.LuxuryEventLanding = {
+    init: initLuxuryLanding,
+    showRegistration: showRegistrationModal,
+    trackEvent: trackUserInteraction
+};
 
 
