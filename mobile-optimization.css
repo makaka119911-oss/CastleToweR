@@ -1,135 +1,383 @@
-/* БАЗОВО: смартфоны 320–480 (mobile-first) */
-.container {
-  width: min(100% - 24px, 520px);
-}
+/* ===== MOBILE OPTIMIZATION (max-width: 768px) ===== */
 
-.nav-right {
-  display: none;
-}
-
-.nav-burger {
-  display: flex;
-}
-
-.hero-grid,
-.about-grid,
-.formats-grid,
-.gallery-grid,
-.how-list,
-.reviews-grid,
-.register-grid,
-.footer-grid {
-  grid-template-columns: 1fr;
-}
-
-.hero-grid {
-  row-gap: 32px;
-}
-
-.hero-cta-row {
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.form-row {
-  flex-direction: column;
-}
-
-.register-qr {
-  width: 190px;
-  height: 190px;
-}
-
-/* 480+ — более комфортный mobile */
-@media (min-width: 480px) {
+/* Общие мобильные стили */
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  
   .container {
-    width: min(100% - 32px, 640px);
+    padding: 0 1.5rem;
   }
-
-  .hero-cta-row {
-    flex-direction: row;
+  
+  .section-spacing {
+    padding: 3rem 0;
   }
-}
-
-/* 768+ — планшеты */
-@media (min-width: 768px) {
-  .container {
-    width: min(100% - 40px, 900px);
+  
+  /* Типография для мобильных */
+  h1, .hero-title {
+    font-size: 2.8rem !important;
   }
-
-  .nav-right {
-    display: flex;
+  
+  h2, .section-title {
+    font-size: 2.4rem !important;
   }
-
-  .nav-burger {
+  
+  h3 {
+    font-size: 1.6rem !important;
+  }
+  
+  p {
+    font-size: 1.1rem !important;
+  }
+  
+  /* Hero секция */
+  .hero-section {
+    height: 90vh;
+    min-height: 600px;
+    padding-top: 2rem;
+  }
+  
+  .hero-content {
+    padding-top: 2rem;
+  }
+  
+  .luxury-badge {
+    padding: 0.6rem 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-title {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-details {
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .detail-item {
+    justify-content: center;
+  }
+  
+  .cta-button {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+  
+  /* About секция */
+  .features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+  }
+  
+  .feature-card {
+    padding: 1.5rem;
+  }
+  
+  .section-description {
+    font-size: 1.2rem;
+    padding: 0 1rem;
+  }
+  
+  /* Host секция */
+  .host-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem;
+  }
+  
+  .host-image {
+    height: 400px;
+  }
+  
+  .host-content {
+    padding-left: 0;
+  }
+  
+  .host-title {
+    font-size: 2.8rem;
+  }
+  
+  .host-stats {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .stat-item {
+    flex: 1;
+    min-width: 100px;
+  }
+  
+  /* Program секция */
+  .program-timeline::before {
+    left: 20px;
+  }
+  
+  .timeline-item {
+    flex-direction: column;
+  }
+  
+  .timeline-time {
+    width: 100%;
+    text-align: left;
+    padding-right: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+  }
+  
+  .timeline-content {
+    margin-left: 3.5rem;
+  }
+  
+  .timeline-icon {
+    left: -2.5rem;
+    width: 50px;
+    height: 50px;
+  }
+  
+  /* QR секция */
+  .qr-container {
+    grid-template-columns: 1fr !important;
+    gap: 2rem;
+  }
+  
+  .qr-content {
+    padding-right: 0;
+    text-align: center;
+  }
+  
+  .qr-features {
+    justify-content: center;
+  }
+  
+  .qr-code-container {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+  }
+  
+  .qr-icon {
+    font-size: 4rem;
+  }
+  
+  /* Invitation секция */
+  .invitation-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .invitation-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .invitation-item {
+    padding: 1.2rem;
+  }
+  
+  /* Footer */
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  
+  .footer-logo,
+  .footer-social,
+  .footer-legal {
+    min-width: 100%;
+  }
+  
+  .footer-legal {
+    text-align: center;
+  }
+  
+  .footer-links {
+    justify-content: center;
+  }
+  
+  .social-icons {
+    justify-content: center;
+  }
+  
+  /* Адаптивные гриды */
+  .features-grid,
+  .host-grid,
+  .qr-container,
+  .invitation-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Убираем некоторые эффекты на мобильных для производительности */
+  .shimmer-effect::after,
+  .luxury-btn::before {
+    animation: none;
     display: none;
   }
-
-  .hero-grid {
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  
+  /* Улучшаем touch-цели */
+  .cta-button,
+  .social-link,
+  .feature-card,
+  .invitation-item {
+    min-height: 44px; /* Минимальный размер для удобного тапа */
   }
-
-  .about-grid,
-  .register-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  
+  /* Оптимизация изображений для мобильных */
+  img {
+    max-width: 100%;
+    height: auto;
   }
-
-  .gallery-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  
+  .host-image {
+    height: auto;
+    max-height: 400px;
   }
-
-  .how-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  
+  /* Улучшаем скролл-индикатор */
+  .scroll-indicator {
+    bottom: 1rem;
   }
-
-  .reviews-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  
+  .scroll-indicator i {
+    font-size: 1.2rem;
   }
-
-  .footer-grid {
-    grid-template-columns: 1.1fr 1fr 1fr;
-  }
-
-  .register-qr {
-    width: 220px;
-    height: 220px;
-  }
-}
-
-/* 1024+ — ноутбуки */
-@media (min-width: 1024px) {
-  .container {
-    width: min(100% - 48px, 1120px);
-  }
-
-  .formats-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .gallery-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .how-list {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .reviews-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  
+  /* Убираем сложные градиенты на слабых устройствах */
+  .hero-overlay,
+  .image-overlay {
+    background: rgba(10, 10, 10, 0.8);
   }
 }
 
-/* 1280+ — широкие ноутбуки */
-@media (min-width: 1280px) {
-  .container {
-    width: min(1180px, 100% - 64px);
+/* ===== ДОПОЛНИТЕЛЬНАЯ АДАПТАЦИЯ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ ===== */
+@media screen and (max-width: 480px) {
+  .hero-title {
+    font-size: 2.2rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .section-title {
+    font-size: 2rem !important;
+  }
+  
+  .cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .host-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .stat-item {
+    width: 100%;
+  }
+  
+  .qr-code-container {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .qr-icon {
+    font-size: 3rem;
+  }
+  
+  .invitation-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .link-divider {
+    display: none;
   }
 }
 
-/* 1440+ — большие мониторы */
-@media (min-width: 1440px) {
+/* ===== ТАБЛЕТКИ (768px - 1024px) ===== */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
   .container {
-    width: min(1320px, 100% - 96px);
+    max-width: 90%;
   }
+  
+  .hero-title {
+    font-size: 3.5rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .host-grid {
+    gap: 2rem;
+  }
+  
+  .host-image {
+    height: 500px;
+  }
+  
+  .host-title {
+    font-size: 3rem;
+  }
+  
+  .qr-container {
+    gap: 2rem;
+  }
+  
+  .invitation-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===== ОПТИМИЗАЦИЯ ДЛЯ ВЕРТИКАЛЬНЫХ МОБИЛЬНЫХ ===== */
+@media screen and (max-height: 700px) and (max-width: 768px) {
+  .hero-section {
+    height: auto;
+    min-height: 100vh;
+    padding: 4rem 0;
+  }
+  
+  .hero-content {
+    padding-top: 3rem;
+  }
+}
+
+/* ===== ПРЕДОТВРАЩЕНИЕ ЗУМА ПРИ ФОКУСЕ НА iOS ===== */
+@media screen and (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* Предотвращает зум на iOS */
+  }
+  
+  .cta-button {
+    font-size: 16px;
+  }
+}
+
+/* ===== АДАПТИВНЫЕ ОТСТУПЫ ДЛЯ БЕЗОПАСНЫХ ОБЛАСТЕЙ ===== */
+.section-spacing,
+.container {
+  padding-left: max(1.5rem, env(safe-area-inset-left));
+  padding-right: max(1.5rem, env(safe-area-inset-right));
+}
+
+.hero-section,
+.footer-section {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
